@@ -2,6 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "ecommerce-backend": "apps/ecommerce-backend"
+    "ecommerce-backend": "apps/ecommerce-backend",
+    "ecommerce-frontend": "apps/ecommerce-frontend",
+    "ecommerce-frontend-e2e": "apps/ecommerce-frontend-e2e"
   }
 }

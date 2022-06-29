@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ecommerce-frontend/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/ecommerce-frontend",
+        "index": "apps/ecommerce-frontend/src/index.html",
+        "baseHref": "/",
+        "main": "apps/ecommerce-frontend/src/main.tsx",
+        "polyfills": "apps/ecommerce-frontend/src/polyfills.ts",
+        "tsConfig": "apps/ecommerce-frontend/tsconfig.app.json",
+        "assets": [
+          "apps/ecommerce-frontend/src/favicon.ico",
+          "apps/ecommerce-frontend/src/assets"
+        ],
+        "styles": ["apps/ecommerce-frontend/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/ecommerce-frontend/src/environments/environment.ts",
+              "with": "apps/ecommerce-frontend/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ecommerce-frontend:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ecommerce-frontend:build:development"
+        },
+        "production": {
+          "buildTarget": "ecommerce-frontend:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ecommerce-frontend/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/ecommerce-frontend"],
+      "options": {
+        "jestConfig": "apps/ecommerce-frontend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
